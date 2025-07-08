@@ -13,18 +13,27 @@ import java.util.Comparator;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/gastototalporempleado")
-public class GatoTotalEmpleadoContoller {
+@RequestMapping("/api/gastos")
+public class GastoEmpleados {
     @Autowired
     SumarGastosPorEmpleadoServicio resumenGastoEmpleado;
     // simulacion coneccion db
     List<ListaEmpleados> gastoEmpleados = fakeDB.ObtenerGatos();
 
-    @GetMapping
+    @GetMapping("/gasto-total-empleados")
     public List<GastoTotalEmpleado> obtenerGastos() {
-        List<GastoTotalEmpleado> aux = resumenGastoEmpleado.totalGatos(gastoEmpleados);
+        List<GastoTotalEmpleado> listaOrdenAlf = resumenGastoEmpleado.totalGatos(gastoEmpleados);
 
-        aux.sort(Comparator.comparing(GastoTotalEmpleado::getNombreEmpleado));
-        return aux;
+        listaOrdenAlf.sort(Comparator.comparing(GastoTotalEmpleado::getNombreEmpleado));
+        return listaOrdenAlf;
+    }
+
+
+    @GetMapping("/gasto-empleados-iva")
+    public List<GastoTotalEmpleado> gastoConIva() {
+        List<GastoTotalEmpleado> listaOrdenAlf = resumenGastoEmpleado.totalGatos(gastoEmpleados);
+
+        listaOrdenAlf.sort(Comparator.comparing(GastoTotalEmpleado::getNombreEmpleado));
+        return listaOrdenAlf;
     }
 }

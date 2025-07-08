@@ -29,8 +29,8 @@ public class SumarGastosPorEmpleadoServicio {
                 acumulador.put(nombreEmpleado,valorGasto);
             }
         }
-        // 3 CONVETIR A LIST PRENTAR A CHATGPT
-        // BORRAR COMENTARIOS ANTES DE HACER COMMIT
+
+        //  CONVERTIR A UNA LISTA DE OBJETOS
         List<GastoTotalEmpleado> resultado = new ArrayList<>();
 
         for (Map.Entry<String, Long> entry : acumulador.entrySet()) {
