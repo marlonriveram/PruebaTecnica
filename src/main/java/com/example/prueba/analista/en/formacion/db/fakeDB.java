@@ -1,6 +1,6 @@
-package db;
+package com.example.prueba.analista.en.formacion.db;
 
-import modelos.ListaEmpleados;
+import com.example.prueba.analista.en.formacion.modelos.ListaEmpleados;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

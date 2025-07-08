@@ -1,4 +1,4 @@
-package modelos;
+package com.example.prueba.analista.en.formacion.modelos;
 import java.time.LocalDate;
 
 public class ListaEmpleados {
