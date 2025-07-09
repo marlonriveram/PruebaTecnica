@@ -8,36 +8,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Service
 public class SumarGastosPorEmpleadoServicio {
-    public List<GastoTotalEmpleado> totalGatos(List<ListaEmpleados> gastoEmpleados) {
+    public List<GastoTotalEmpleado> totalGatos(List<ListaEmpleados> empleados) {
 
-        // objeto vacio
-        Map<String,Long> acumulador = new HashMap<>();
+        Map<String, GastoTotalEmpleado> acumulador = new HashMap<>();
 
-        for (ListaEmpleados gastoEmpleado : gastoEmpleados  ){
-            String nombreEmpleado = gastoEmpleado.getNombreEmpleado();
-            Long valorGasto = gastoEmpleado.getTotalGasto();
+        for (ListaEmpleados empleado : empleados) {
+            String nombre = empleado.getNombreEmpleado();
+            Long gasto = empleado.getTotalGasto();
 
-            if(acumulador.containsKey(nombreEmpleado)){
+            if (acumulador.containsKey(nombre)) {
 
-                Long valorGastoActual = acumulador.get(nombreEmpleado);
+                GastoTotalEmpleado existente = acumulador.get(nombre);
+                Long nuevoTotal = existente.getTotalGasto() + gasto;
+                existente.setTotalGasto(nuevoTotal);
+            } else {
 
-                acumulador.put(nombreEmpleado,valorGastoActual+valorGasto);
-
-            }else {
-                acumulador.put(nombreEmpleado,valorGasto);
+                GastoTotalEmpleado nuevo = new GastoTotalEmpleado(nombre, gasto);
+                acumulador.put(nombre, nuevo);
             }
         }
 
-        //  CONVERTIR A UNA LISTA DE OBJETOS
-        List<GastoTotalEmpleado> resultado = new ArrayList<>();
-
-        for (Map.Entry<String, Long> entry : acumulador.entrySet()) {
-            resultado.add(new GastoTotalEmpleado(entry.getKey(), entry.getValue()));
-        }
-
-        return resultado;
-
+        return new ArrayList<>(acumulador.values());
     }
 }
+
